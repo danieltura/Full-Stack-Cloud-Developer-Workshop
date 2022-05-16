@@ -1,7 +1,3 @@
-from os import supports_dir_fd
-from turtle import st
-
-
 COMMANDS = ["SEARCH", "ADD", "LIST", "DELETE", "UPDATE", "EXIT"]
 
 STUDENT_RECORDS = []
@@ -45,11 +41,10 @@ def find(param, value):
 
 
 def SEARCH():
+    error_msg = "Please Enter Number only:"
     while True:
         print("Search By: \nName : 1 \nGrade: 2")
-        search_option = int(
-            get_number_input("Your Search Key: ", "Please Enter Number only:")
-        )
+        search_option = int(get_number_input("Your Search Key: ", error_msg))
 
         if search_option == 1:
             name = input("Name:")
@@ -57,7 +52,7 @@ def SEARCH():
             break
 
         if search_option == 2:
-            grade = get_number_input("Grade: ", "Please Enter Number only:")
+            grade = get_number_input("Grade: ", error_msg)
             find("grade", grade)
             break
 
@@ -99,29 +94,33 @@ def ADD():
 def UPDATE():
     search_name = input("Please Enter Name Of The Student: ")
     student = find("name", search_name)
+    if student is None:
+        print("Student Not Found.")
+    else:
+        new_grade = get_number_input(
+            "\nPlease, Enter A New Grade: ", "Please Enter Number only:"
+        )
+        STUDENT_RECORDS[student[1]]["grade"] = new_grade
+        print("Student Grade Updated.")
 
-    new_grade = get_number_input(
-        "\nPlease, Enter A New Grade: ", "Please Enter Number only:"
-    )
-
-    STUDENT_RECORDS[student[1]]["grade"] = new_grade
-    print("Student Grade Updated.")
     return True
 
 
 def DELETE():
     search_name = input("Please Enter Name Of The Student You Wish To Delete: ")
     student = find("name", search_name)
-
-    while True:
-        confirm = input("\nAre You Sure You Want To Delete This Student ^ (Y/N) : ")
-        if confirm.upper() == "Y":
-            print(f"{search_name} Deleted.")
-            STUDENT_RECORDS.pop(student[1])
-            break
-        if confirm.upper() == "N":
-            break
-        print("Error, Please Enter Y or N Only.")
+    if student is None:
+        print("Error, Student Name Not Found.")
+    else:
+        while True:
+            confirm = input("\nAre You Sure You Want To Delete This Student ^ (Y/N) : ")
+            if confirm.upper() == "Y":
+                print(f"{search_name} Deleted.")
+                STUDENT_RECORDS.pop(student[1])
+                break
+            if confirm.upper() == "N":
+                break
+            print("Error, Please Enter Y or N Only.")
 
     return True
 
