@@ -1,0 +1,48 @@
+body {
+  background-color: #f1f1f1;
+}
+
+h1 {
+  color: black;
+  text-align: center;
+}
+
+p {
+  font-family: Impact;
+  font-size: 20px;
+  color: #7b7978;
+  text-align: center;
+}
+
+form {
+  text-align: center;
+  padding-top: 10%;
+}
+
+.card {
+  /* Add shadows to create the "card" effect */
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  transition: 0.3s;
+  background-color: #dfdddc;
+  margin: 20px 20px 20px 20%;
+  width: 50%;
+  height: 90vh;
+}
+
+/* On mouse-over, add a deeper shadow */
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+
+.container {
+  padding-top: 10%;
+}
+
+input:hover {
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+
+label {
+  font-family: verdana;
+  font-size: 16px;
+}
